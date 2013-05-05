@@ -64,7 +64,7 @@ function getMapDetails(venues){
     console.log("TWEETS");
     console.log(tweet);
     $('#loader').addClass("hidden");
-    if (friend){
+    if (tweet.friend){
       $("#tweets").append("<span id='tweet' class='friend'>" + tweet.text + "</span> </br></br>");
     }
     else {
