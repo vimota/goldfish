@@ -25,7 +25,7 @@
 			</h1>
 			<br>
 			<br>
-			<form>
+			<div id="formBox">
 				<div align="center">
 					<div class="input-prepend" style="margin-top:20px;">
 						<span class="add-on">@</span>
@@ -35,18 +35,19 @@
 						<input class="input-medium" id="usrLoc" value="Toronto" style="width:182px" type="text" placeholder="Location">
 					</div>
 					<div>
-						<button class="btn" type="submit">Connect & Search</button>
+						<button class="btn" >Connect & Search</button>
 					</div>
 				</div>
-			</form>
+			</div>
 			<hr class="divider hidden">
             <!-- <img src="loading.gif" class="hidden" id="loader"> -->
             <hr class="divider hidden">
-            <div class="hidden" id="map-summary">
-                <h2 id="clubTitle"></h2>
-                <div id="tweets"></div>
-            </div>
+
         </div>
-		<div id="map-canvas"/>
+		<div id="map-canvas"></div>
+        <div id="map-summary">
+            <h2 id="clubTitle"></h2>
+            <div id="tweets"></div>
+        </div>
     </body>
 </html>

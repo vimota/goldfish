@@ -11,7 +11,8 @@ function getMapDetails(venues){
       center: new google.maps.LatLng(venues[i].lat, venues[i].lng),
       population: venues[i].hereNow + venues[i].male + venues[i].female,
       percentFade: (venues[i].male+venues[i].female === 0) ? 0.5 : (venues[i].male /(venues[i].male+venues[i].female)),
-      friend: venues[i].friend
+      friend: venues[i].friend,
+      tweets: venues[i].tweets
     };
   }
   var clubCircle;
@@ -57,24 +58,36 @@ function getMapDetails(venues){
     }
   }
   initialize();
+  $('#map-canvas').show();
 
-  function embedTweet(tweet) {
+  function embedTweet(index, tweet) {
+    console.log("TWEETS");
+    console.log(tweet);
     $(".hidden").removeClass(".hidden");
     $('#loader').addClass("hidden");
-    $("#tweets").append(tweet);
+    $("#tweets").append(tweet.text);
   }
 
-  function details(MouseEvent){
+  function details(mouseEvent){
+    console.log(mouseEvent.latLng.lat());
+    var small, minRadius = 1000000;
     for(var i in clubmap){
-      if (clubmap[i].center == MouseEvent.latLng){
-        $("#clubTitle").text(clubmap[i].name);
-        $.each(clubmap[i].tweets, function(i, tweet){
-          cb.__call(
-          'statuses/oembed',
-            {id:tweet.id},
-            embedTweet);
-          });
+      var distance = Math.pow(Math.pow(mouseEvent.latLng.lat() - clubmap[i].center.lat(),2) + Math.pow(mouseEvent.latLng.lng() - clubmap[i].center.lng(), 2), 0.5);
+      var radius = clubmap[i].population / maxPop * 0.0100;
+      // console.log(i);
+      if (distance <= (radius) && (radius !== 0)){
+        console.log(i);
+        console.log(distance);
+        console.log(radius);
+        if (minRadius > distance) {
+          minRadius = distance;
+          small = i;
+        }
       }
     }
+    $("#clubTitle").text(small);
+    console.log(clubmap[small]);
+    $("#tweets").html("");
+    $.each(clubmap[small].tweets, embedTweet)
   }
 }

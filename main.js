@@ -12,6 +12,7 @@ $(document).ready(function() {
   cb.setConsumerKey(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
   cb.setToken('14197193-vx7NLH8zJRSksrotn3k2ZnOYkDUEeplMxH14pz9rE', 'FhRv0OwSCWotHg4HW50FPPJGU5o3Yhn6WWjbT15HXOw');
   // getRelatedTweets(TWITTER_USERID, CITY, function(venues){console.log(JSON.stringify(venues))});
+  $(".btn").click(getMap);
 
   function getRelatedTweets(userId, city, callback) {
     $('#loader').removeClass("hidden")

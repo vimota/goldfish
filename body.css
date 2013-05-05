@@ -30,8 +30,9 @@ body {
     box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
 }
 
-form {
-	margin-top: 30px;
+#formBox {
+	margin-top: 20px;
+    margin-bottom: 30px;
 	padding-bottom:20px;
 	background-color: #ffffff;
 	border-radius: 4px;
@@ -54,6 +55,7 @@ p {
     margin: 0 auto;
 }
 #map-canvas{
+    display: none;
     height: 400px;
 }
 .hidden{
