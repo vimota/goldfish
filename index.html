@@ -5,13 +5,39 @@
 		<link rel="stylesheet" href="body.css">
 		<link rel="stylesheet" href="static/bootstrap/css/bootstrap-responsive.css">
         <script src="main.js"></script>
+
+        <!--  For Twitter API -->
+        <script type="text/javascript" src="sha1.js"></script>
+        <script type="text/javascript" src="codebird.js"></script>
+
+
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<link rel="stylesheet" href="static/bootstrap/css/bootstrap.css">
         <style></style>
     </head>
     <body>
         <div class="container">
-            <p>Content Goes Here</p>
-			<button class="btn btn-primary">TestButton</button>
+			<h1>
+				<span class="pageTitle">GoldFish</span>
+			</h1>
+			<form>
+				<div align="center">
+					<div class="input-prepend" style="margin-top:20px;">
+						<span class="add-on">@</span>
+						<input class="span2" id="usrName" value="vimota" type="text" placeholder="Username">
+					</div>
+					<div>
+						<input class="input-medium" id="usrLoc" value="Toronto" style="width:192px" type="text" placeholder="Location">
+					</div>
+					<div>
+						<button class="btn" type="submit" style="margin-left:50px;" onClick="btnConnectClick()">Connect & Search</button>
+					</div>
+				</div>
+			</form>
+			<hr id="divider1">
+			<div id="divMap"></div>
+			<hr id="divider2">
+			<div id="divSummary"></div>
         </div>
     </body>
 </html>
