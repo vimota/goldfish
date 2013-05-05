@@ -10,6 +10,8 @@ h1 {
     margin: 0 10px;
     font-size: 50px;
     text-align: center;
+	padding-top: 20px;
+	margin-bottom: 30px;
 }
 
 html,
@@ -28,12 +30,22 @@ body {
     box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
 }
 
+form {
+	margin-top: 30px;
+	padding-bottom:20px;
+	background-color: #ffffff;
+	border-radius: 4px;
+	border: 1px solid #a3a3a3;
+	box-shadow: 0 1px 10px #a0a0a0, inset 0 1px 0 #fff;
+}
+
 p {
     margin: 1em 0;
 }
 
 #pageTitle{
-	color:#e0e0e0;
+	color:#ffffff;
+	text-shadow: 1px #7c7c7c;
 }
 
 .container {
