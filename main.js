@@ -13,10 +13,6 @@ $(document).ready(function() {
   cb.setToken('14197193-vx7NLH8zJRSksrotn3k2ZnOYkDUEeplMxH14pz9rE', 'FhRv0OwSCWotHg4HW50FPPJGU5o3Yhn6WWjbT15HXOw');
   getRelatedTweets(TWITTER_USERID, CITY);
 
-  function btnConnectClick(){
-  	VENUES = getVenueNames(CITY);
-  }
-
   function getRelatedTweets(userId, city, callback) {
     getVenueNames(city, function(venues) {
       getTwitterUserIds(userId, function(userIds){

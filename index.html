@@ -23,26 +23,29 @@
     <body>
         <div class="container">
 			<h1>
-				<span class="pageTitle">GoldFish</span>
+				<span id="pageTitle">GoldFish</span>
 			</h1>
 			<form>
 				<div align="center">
 					<div class="input-prepend" style="margin-top:20px;">
 						<span class="add-on">@</span>
-						<input class="span2" id="usrName" value="vimota" type="text" placeholder="Username">
+						<input class="span2" id="usrName" type="text" placeholder="Username">
 					</div>
 					<div>
 						<input class="input-medium" id="usrLoc" value="Toronto" style="width:182px" type="text" placeholder="Location">
 					</div>
 					<div>
-						<button class="btn" type="submit" style="margin-left:50px;" onClick="getMap()">Connect & Search</button>
+						<button class="btn" type="submit" style="margin-left:50px;" onClick="getRelatedTweets()">Connect & Search</button>
 					</div>
 				</div>
 			</form>
-			<hr id="divider1">
+			<hr class="divider">
 			<div id="map-canvas"></div>
-			<hr id="divider2">
-			<div id="map-summary"></div>
+			<hr class="divider">
+			<div id="map-summary">
+				<h2 id="clubTitle"></h2>
+				<div id="tweets"></div>
+			</div>
         </div>
     </body>
 </html>
