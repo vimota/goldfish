@@ -57,6 +57,7 @@ function getMapDetails(venues){
   initialize();
 
   function embedTweet(tweet) {
+    $(".hidden").removeClass(".hidden");
     $("#tweets").append(tweet);
   }
 

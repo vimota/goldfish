@@ -32,7 +32,7 @@ p {
     margin: 1em 0;
 }
 
-#pageTitle {
+#pageTitle{
 	color:#7db8ff;
 }
 
@@ -41,9 +41,9 @@ p {
     width: 380px;
     margin: 0 auto;
 }
-#map-canvas {
+#map-canvas{
     height: 100%;
 }
-.divider, #map-canvas, #map-summary{
+.hidden{
     display: none;
 }
