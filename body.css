@@ -42,7 +42,7 @@ p {
     margin: 0 auto;
 }
 #map-canvas{
-    height: 100%;
+    height: 400px;
 }
 .hidden{
     display: none;
