@@ -17,7 +17,7 @@ $(document).ready(function() {
   	VENUES = getVenueNames(CITY);
   }
 
-  function getRelatedTweets(userId, city) {
+  function getRelatedTweets(userId, city, callback) {
     getVenueNames(city, function(venues) {
       getTwitterUserIds(userId, function(userIds){
         $.each(userIds, function(index, userId) {
@@ -41,6 +41,7 @@ $(document).ready(function() {
             // QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
 
             // CALL CALBACK!!!
+            callback(venues);
           }
         );
         });
@@ -73,6 +74,6 @@ $(document).ready(function() {
 		});
 	}
 	function getMap(){
-		getMapDetails();
+    getRelatedTweets(TWITTER_USERID, CITY, getMapDetails);
 	}
 });
