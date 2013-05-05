@@ -23,7 +23,7 @@
     <body>
         <div class="container">
 			<h1>
-				<span class="pageTitle">GoldFish</span>
+				<span id="pageTitle">GoldFish</span>
 			</h1>
 			<form>
 				<div align="center">
@@ -39,10 +39,13 @@
 					</div>
 				</div>
 			</form>
-			<hr id="divider1">
-			<div id="map-canvas"></div>
-			<hr id="divider2">
-			<div id="map-summary"></div>
+			<hr class="divider hidden">
+			<div class="hidden" id="map-canvas"></div>
+			<hr class="divider hidden">
+			<div class="hidden" id="map-summary">
+				<h2 id="clubTitle"></h2>
+				<div id="tweets"></div>
+			</div>
         </div>
     </body>
 </html>

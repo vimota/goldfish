@@ -13,13 +13,8 @@ $(document).ready(function() {
   cb.setToken('14197193-vx7NLH8zJRSksrotn3k2ZnOYkDUEeplMxH14pz9rE', 'FhRv0OwSCWotHg4HW50FPPJGU5o3Yhn6WWjbT15HXOw');
   getRelatedTweets(TWITTER_USERID, CITY, function(){});
 
-  function btnConnectClick(){
-  	getMap();
-  }
-
   function getRelatedTweets(userId, city, callback) {
-    getVenueNames(city, function(venues) {
-      VENUES = venues;
+    getVenueNames(city, function() {
       getTwitterUserIds(userId, function(userIds){
         var today = new Date();
         var dd = today.getDate();
@@ -35,64 +30,84 @@ $(document).ready(function() {
             {user_id:userId, count: 20},
             function (tweets) {
               $.each(tweets, function(tweetIndex, tweet) {
-                $.each(venues, function(venueIndex, venue) {
-                  if (tweet.text && tweet.text.toLowerCase().indexOf(venue.name.toLowerCase()) !== -1) {
-                    console.log(tweet.text);
+                $.each(VENUES, function(venueIndex, venue) {
+                  console.log("SEARCHING VENUE: " + venue.name.toLowerCase() + " WITH TWEET: " + tweet.text);
+                  if (tweet.text && (tweet.text.toLowerCase().indexOf(venue.name.toLowerCase()) != -1 || (venue.twitterHandle != -1 && tweet.text.toLowerCase().indexOf(venue.twitterHandle.toLowerCase()) != -1))) {
+                    console.log("MATCH");
                     tweet.friend = true;
-                    venues[venueIndex].tweets.push(tweet);
-                    firstName = tweet.name.split(" ")[0].toUpperCase();
+                    console.log(tweet);
+                    VENUES[venueIndex].tweets.push(tweet);
+                    firstName = tweet.user.name.split(" ")[0].toUpperCase();
                     // increment gender's count
                     if (GENDER_MAP[firstName]) {
-                      venues[venueIndex][GENDER_MAP[firstName]]++;
+                      console.log("GENDER: " + GENDER_MAP[firstName]);
+                      VENUES[venueIndex][GENDER_MAP[firstName]]++;
                     }
                     else {
-                      venues[venueIndex].hereNow++;
+                      VENUES[venueIndex].hereNow++;
                     }
                   }
                 });
-                console.log(venues);
+                console.log(VENUES);
               });
             }
           );
         });
+
         // QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
-        $.each(venues, function(index, venue) {
+        $.each(VENUES, function(index, venue) {
+          var query;
+          if (venue.twitterHandle === -1) {
+            query = venue.name.toLowerCase() + ' since:' + today;
+          } else {
+            query = '@' + venue.twitterHandle + ' since:' + today;
+          }
           cb.__call(
             'search_tweets',
-            {q:venue.name + ' since:' + today, result_type: 'recent', geocode: '43.652527,-79.381961,1mi'},
+            {q:query, result_type: 'recent', geocode: '43.652527,-79.381961,1mi'},
             function (tweets) {
-              if (tweet.text && tweet.text.toLowerCase().indexOf(venue.name.toLowerCase()) !== -1) {
-                console.log(tweet.text);
-                tweet.friend = false;
-                venues[venueIndex].tweets.push(tweet);
-                firstName = tweet.name.split(" ")[0].toUpperCase();
-                // increment gender's count
-                if (GENDER_MAP[firstName]) {
-                  venues[GENDER_MAP[firstName]]++;
-                } else {
-                  venues[venueIndex].hereNow++;
-                }
-              }
+              console.log ("VENUE: " + query);
+              console.log(tweets);
+              $.each(tweets.statuses, function(tweetIndex, tweet) {
+                updateVenues(tweet, venue, index);
+              });
             }
           );
         });
 
+        console.log(VENUES);
+
         // CALL CALBACK!!!
-        callback(venues);
+        callback(VENUES);
       });
     });
   }
 
+  function updateVenues(tweet, venue, venueIndex) {
+    console.log("MATCH - VENUE " + venue);
+    console.log(tweet);
+    tweet.friend = false;
+    VENUES[venueIndex].tweets.push(tweet);
+    firstName = tweet.user.name.split(" ")[0].toUpperCase();
+    // increment gender's count
+    if (GENDER_MAP[firstName]) {
+      VENUES[venueIndex][GENDER_MAP[firstName]]++;
+    } else {
+      VENUES[venueIndex].hereNow++;
+    }
+  }
+
   function getTwitterUserIds(userId, callback) {
-    var userIds = [];
-    cb.__call(
-      'followers_ids',
-      {user_id:userId},
-      function (reply) {
-        userIds = userIds.concat(reply.ids);
-        callback(userIds);
-      }
-    );
+    // var userIds = [];
+    // cb.__call(
+    //   'followers_ids',
+    //   {user_id:userId},
+    //   function (reply) {
+    //     userIds = userIds.concat(reply.ids);
+    //     callback(userIds);
+    //   }
+    // );
+    callback([1404419046, 1404541021, 1404408692]);
   }
   function getVenueNames(city, callback){
 		$.get("https://api.foursquare.com/v2/venues/search?near=" + city + ", ON&intent=browse&radius=500&categoryId=4bf58dd8d48988d11f941735&oauth_token=JUPFSHFSPFGFUDZF4PWAWXFDRNK4FYSWYXU5GHQYVAAXHID1&v=20130504",
@@ -101,7 +116,8 @@ $(document).ready(function() {
 				$.each(data.response.venues, function(i, venue){
 					places.push({name: venue.name, lat: venue.location.lat, lng:venue.location.lng, hereNow: venue.hereNow.count, male:0, female:0, tweets:[], twitterHandle:(venue.contact.twitter) ? venue.contact.twitter : -1});
           if (i === data.response.venues.length - 1) {
-            callback(places);
+            VENUES = places;
+            callback();
           }
 				});
 		});
