@@ -14,6 +14,7 @@ $(document).ready(function() {
   // getRelatedTweets(TWITTER_USERID, CITY, function(venues){console.log(JSON.stringify(venues))});
 
   function getRelatedTweets(userId, city, callback) {
+    $('#loader').removeClass("hidden")
     getVenueNames(city, function() {
       getTwitterUserIds(userId, function(userIds){
         var today = new Date();
@@ -54,7 +55,7 @@ $(document).ready(function() {
           );
         });
 
-        // QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
+        QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
         $.each(VENUES, function(index, venue) {
           var query;
           if (venue.twitterHandle === -1) {
