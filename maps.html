@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>For the boys</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+		html, body, #map-canvas {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+     	}
+	</style>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXi6Pr5YE_1wh31u7l4QY4AjHrQR4JY9U&sensor=false">  <!--false or true depending on usage of gps-->
+		</script>
+ 		<script>
+// Create an object containing LatLng, population.
+var citymap = {};
+citymap['fox'] = {
+  center: new google.maps.LatLng(43.654336, -79.391385),
+  population: 10
+};
+citymap['phils'] = {
+  center: new google.maps.LatLng(43.655816, -79.392065),
+  population: 5
+};
+citymap['beta'] = {
+  center: new google.maps.LatLng(43.656197, -79.390439),
+  population: 3
+};
+var cityCircle;
+
+
+function initialize() {
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(43.655917, -79.382267),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  var popMax.citymap['fox'];
+	for (var city in citymap) {
+		if city > popMax
+			popMax = city
+	};
+
+	for (var city in citymap) {
+	    // Construct the circle for each value in citymap. We scale population by 20.
+	    var populationOptions = {
+	      strokeColor: '#FF0000',
+	      strokeOpacity: 0.8,
+	      strokeWeight: 2,
+	      fillColor: '#FF0000',
+	      fillOpacity: 0.35,
+	      map: map,
+	      center: citymap[city].center,
+	      radius: (citymap[city].population)/popMax*20
+	    };
+	    cityCircle = new google.maps.Circle(populationOptions);
+	};
+}
+
+function loadScript() {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCXi6Pr5YE_1wh31u7l4QY4AjHrQR4JY9U&sensor=false&callback=initialize";
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+google.maps.event.addDomListener(window, 'load', initialize);
+
+ 		</script>
+	</head>
+	<body>
+		<div id="map-canvas" style="width: 100%; height: 100%" </div>
+	</body>
+</html>
+
+
