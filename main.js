@@ -3,7 +3,8 @@ $(document).ready(function() {
       TWITTER_USERID   = 14197193,
       TWITTER_CONSUMER_KEY = "rdyanWJSlClGZyUOZFsbrg",
       TWITTER_CONSUMER_SECRET = "j5eBd36HKo96GkFF9NX7qUa34cERVTwYLuAR40lhRI",
-	    LOC = document.getElementById("usrLoc").value;
+  	  LOC = document.getElementById("usrLoc").value,
+  	  VENUES;
 
   cb = new Codebird;
   cb.setConsumerKey(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
@@ -14,7 +15,7 @@ $(document).ready(function() {
   $.get("https://api.foursquare.com/v2/venues/search?near=Toronto, ON&intent=browse&radius=1500&categoryId= 4d4b7105d754a06376d81259&oauth_token=JUPFSHFSPFGFUDZF4PWAWXFDRNK4FYSWYXU5GHQYVAAXHID1&v=20130504")
 
   function btnConnectClick(){
-	alert("btnConnectClick");
+	VENUES = getVenueNames(LOC);
   }
 
   function getRelatedTweets(username, venues, isPublic) {
