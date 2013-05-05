@@ -47,10 +47,10 @@
           maxPop = citymap[city].population;
         }
       }
-      // percentFade = 
-      // diffRed = (diffRed * percentFade) + 255;
-      // diffGreen = (diffGreen * percentFade) + 116;
-      // diffBlue = (diffBlue * percentFade) + 140;
+      percentFade = 0.5;
+      diffRed = (diffRed * percentFade) + 255;
+      diffGreen = (diffGreen * percentFade) + 116;
+      diffBlue = (diffBlue * percentFade) + 140;
       for (var city in citymap) {
         // Construct the circle for each value in citymap.
         var populationOptions = {
@@ -67,7 +67,7 @@
         cityCircle = new google.maps.Circle(populationOptions);
       }
     }
-  google.maps.event.addDomListener(window, 'load', initialize);
+  //google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
