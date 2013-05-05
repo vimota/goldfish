@@ -60,12 +60,16 @@ function getMapDetails(venues){
   initialize();
   $('#map-canvas').show();
 
-  function embedTweet(index, tweet) {
+  function embedTweet(index, tweet, friend) {
     console.log("TWEETS");
     console.log(tweet);
-    $(".hidden").removeClass(".hidden");
     $('#loader').addClass("hidden");
-    $("#tweets").append(tweet.text);
+    if (friend){
+      $("#tweets").append("<span id='tweet' class='friend'>" + tweet.text + "</span> </br></br>");
+    }
+    else {
+      $("#tweets").append("<span id='tweet'>" + tweet.text + "</span> </br></br>");
+    }
   }
 
   function details(mouseEvent){
@@ -88,6 +92,7 @@ function getMapDetails(venues){
     $("#clubTitle").text(small);
     console.log(clubmap[small]);
     $("#tweets").html("");
-    $.each(clubmap[small].tweets, embedTweet)
+    $("#map-summary").show();
+    $.each(clubmap[small].tweets, embedTweet, clubmap[small].friend)
   }
 }
