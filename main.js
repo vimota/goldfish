@@ -23,6 +23,7 @@ $(document).ready(function() {
   function getTwitterUsers(username, isPublic) {
     var users = [];
   }
+});
 
   function getVenueNames(city){
 			$.get("https://api.foursquare.com/v2/venues/search?near=" + city + ", ON&intent=browse&radius=500&categoryId=4bf58dd8d48988d11f941735&oauth_token=JUPFSHFSPFGFUDZF4PWAWXFDRNK4FYSWYXU5GHQYVAAXHID1&v=20130504",
