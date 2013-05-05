@@ -55,7 +55,7 @@ $(document).ready(function() {
           );
         });
 
-        QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
+        // QUERY TWITTER FOR MENTIONS OF EACH VENUE !!!
         $.each(VENUES, function(index, venue) {
           var query;
           if (venue.twitterHandle === -1) {
@@ -123,11 +123,12 @@ $(document).ready(function() {
 				});
 		});
 	}
-	function getMap(){
-    // getRelatedTweets(TWITTER_USERID, CITY, getMapDetails);
-    getMapDetails(VENUES);
-	}
 });
+
+function getMap(){
+  // getRelatedTweets(TWITTER_USERID, CITY, getMapDetails);
+  getMapDetails(VENUES);
+}
 
 // implement JSON.stringify serialization
 JSON.stringify = JSON.stringify || function (obj) {

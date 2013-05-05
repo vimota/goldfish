@@ -7,7 +7,7 @@ function getMapDetails(venues){
   // Create an object containing LatLng, population.
   var clubmap = {};
   for (var i = 0; i < venues.length; i++ ){
-    clubmap[venues.name] = {
+    clubmap[venues[i].name] = {
       center: new google.maps.LatLng(venues[i].lat, venues[i].lng),
       population: venues[i].hereNow + venues[i].male + venues[i].female,
       percentFade: (venues[i].male+venues[i].female === 0) ? 0.5 : (venues[i].male /(venues[i].male+venues[i].female)),
@@ -17,6 +17,7 @@ function getMapDetails(venues){
   var clubCircle;
   //need to pass in object from victor
   function initialize() {
+    console.log(clubmap);
     var myLatlng = new google.maps.LatLng(43.6481, -79.3800);
     var mapOptions = {
       center: myLatlng,
@@ -29,29 +30,29 @@ function getMapDetails(venues){
     maxPop = 1;
     for(var club in clubmap){
       if (clubmap[club].population > maxPop){
-        maxPop = clubmap[club].population;
+        maxPop = club.population;
       }
     }
     for (var club in clubmap) {
-    diffRed = (diffRed * percentFade) + 255;
-    diffGreen = (diffGreen * percentFade) + 116;
-    diffBlue = (diffBlue * percentFade) + 140;
-    var ratioColour = "#" + diffRed.toString(16) + diffGreen.toString(16) + diffBlue.toString(16);
-      // Construct the circle for each value in clubmap.
-      var populationOptions = {
-        //if friend set to green
-        strokeColor: (club.friend) ? '#006600' : ratioColour,
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: ratioColour,
-        fillOpacity: 0.35,
-        map: map,
-        center: clubmap[club].center,
-        radius: clubmap[club].population / maxPop * 100,
-        clickable: true
-      };
-      clubCircle = new google.maps.Circle(populationOptions);
-      google.maps.event.addDomListener(clubCircle, 'click', details);
+      diffRed = (diffRed * club.percentFade) + 255;
+      diffGreen = (diffGreen * club.percentFade) + 116;
+      diffBlue = (diffBlue * club.percentFade) + 140;
+      var ratioColour = "#" + diffRed.toString(16) + diffGreen.toString(16) + diffBlue.toString(16);
+        // Construct the circle for each value in clubmap.
+        var populationOptions = {
+          //if friend set to green
+          strokeColor: (club.friend) ? '#006600' : ratioColour,
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: ratioColour,
+          fillOpacity: 0.35,
+          map: map,
+          center: club.center,
+          radius: club.population / maxPop * 100,
+          clickable: true
+        };
+        clubCircle = new google.maps.Circle(populationOptions);
+        google.maps.event.addDomListener(clubCircle, 'click', details);
     }
   }
   initialize();
