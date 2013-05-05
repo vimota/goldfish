@@ -30,28 +30,29 @@ function getMapDetails(venues){
     maxPop = 1;
     for(var club in clubmap){
       if (clubmap[club].population > maxPop){
-        maxPop = club.population;
+        maxPop = clubmap[club].population;
       }
     }
     for (var club in clubmap) {
-      diffRed = (diffRed * club.percentFade) + 255;
-      diffGreen = (diffGreen * club.percentFade) + 116;
-      diffBlue = (diffBlue * club.percentFade) + 140;
+      diffRed = (diffRed * clubmap[club].percentFade) + 255;
+      diffGreen = (diffGreen * clubmap[club].percentFade) + 116;
+      diffBlue = (diffBlue * clubmap[club].percentFade) + 140;
       var ratioColour = "#" + diffRed.toString(16) + diffGreen.toString(16) + diffBlue.toString(16);
         // Construct the circle for each value in clubmap.
         var populationOptions = {
           //if friend set to green
-          strokeColor: (club.friend) ? '#006600' : ratioColour,
+          strokeColor: (clubmap[club].friend) ? '#006600' : ratioColour,
           strokeOpacity: 0.8,
           strokeWeight: 2,
           fillColor: ratioColour,
           fillOpacity: 0.35,
           map: map,
-          center: club.center,
-          radius: club.population / maxPop * 100,
+          center: clubmap[club].center,
+          radius: clubmap[club].population / maxPop * 200,
           clickable: true
         };
         clubCircle = new google.maps.Circle(populationOptions);
+        console.log(clubCircle);
         google.maps.event.addDomListener(clubCircle, 'click', details);
     }
   }
