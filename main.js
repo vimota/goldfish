@@ -33,6 +33,4 @@ $(document).ready(function() {
 				});
 		});
   };
-
-ef24ae3d49373446f3d74e035348f91e3020e013
 });
