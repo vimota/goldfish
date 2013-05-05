@@ -23,15 +23,17 @@ $(document).ready(function() {
   function getTwitterUsers(username, isPublic) {
     var users = [];
   }
-});
 
   function getVenueNames(city){
-			$.get("https://api.foursquare.com/v2/venues/search?near=" + city + ", ON&intent=browse&radius=500&categoryId=4bf58dd8d48988d11f941735&oauth_token=JUPFSHFSPFGFUDZF4PWAWXFDRNK4FYSWYXU5GHQYVAAXHID1&v=20130504",
-			function(data){
-				places = new Array();
-				$.each(data.response.venues, function(i, venues){
-					places.push({name: venues.name, lat: venues.location.lat, lng:venues.location.lng, hereNow: venues.hereNow.count});
-				});
+		$.get("https://api.foursquare.com/v2/venues/search?near=" + city + ", ON&intent=browse&radius=500&categoryId=4bf58dd8d48988d11f941735&oauth_token=JUPFSHFSPFGFUDZF4PWAWXFDRNK4FYSWYXU5GHQYVAAXHID1&v=20130504",
+		function(data){
+			var places = new Array();
+			$.each(data.response.venues, function(i, venues){
+				places.push({name: venues.name, lat: venues.location.lat, lng:venues.location.lng, hereNow: venues.hereNow.count});
+			});
 		});
-  };
+	}
+	function getMap(){
+		getMapDetails();
+	}
 });

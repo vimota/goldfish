@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="static/bootstrap/css/bootstrap-responsive.css">
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="main.js"></script>
+        <script src="map.js"></script>
 
         <!--  For Twitter API -->
         <script type="text/javascript" src="sha1.js"></script>
@@ -14,7 +15,10 @@
 
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<link rel="stylesheet" href="static/bootstrap/css/bootstrap.css">
-        <style></style>
+
+		<!-- MAPS  -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCReRLRZaLnk1-rwg9ui1U-rjhzQUEQ7s4&sensor=true"></script>
+
     </head>
     <body>
         <div class="container">
@@ -25,20 +29,20 @@
 				<div align="center">
 					<div class="input-prepend" style="margin-top:20px;">
 						<span class="add-on">@</span>
-						<input class="span2" id="usrName" value="vimota" type="text" placeholder="Username">
+						<input class="span2" id="usrName" type="text" placeholder="Username">
 					</div>
 					<div>
 						<input class="input-medium" id="usrLoc" value="Toronto" style="width:182px" type="text" placeholder="Location">
 					</div>
 					<div>
-						<button class="btn" type="submit" style="margin-left:50px;" onClick="btnConnectClick()">Connect & Search</button>
+						<button class="btn" type="submit" style="margin-left:50px;" onClick="getMap()">Connect & Search</button>
 					</div>
 				</div>
 			</form>
 			<hr id="divider1">
-			<div id="divMap"></div>
+			<div id="map-canvas"></div>
 			<hr id="divider2">
-			<div id="divSummary"></div>
+			<div id="map-summary"></div>
         </div>
     </body>
 </html>
