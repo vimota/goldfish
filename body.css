@@ -19,13 +19,13 @@ input {
 
 body {
 	max-width: 90%;
-    width: 500px;
+    width: 640px;
+	height: 960px;
     padding: 30px 20px 50px;
     border: 1px solid #b3b3b3;
     border-radius: 4px;
     margin: 0 auto;
     box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-    background: #fcfcfc;
 }
 
 p {
@@ -33,7 +33,7 @@ p {
 }
 
 #pageTitle{
-	color:#7db8ff;
+	color:#e0e0e0;
 }
 
 .container {
