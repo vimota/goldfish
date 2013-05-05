@@ -14,12 +14,26 @@
 			<h1>
 				<span class="pageTitle">GoldFish</span>
 			</h1>
-			<div class="input-prepend" style="margin-top:20px;">
-				<span class="add-on">@</span>
-				<input class="span2" id="prependedInput" type="text" placeholder="Username">
-				<button class="btn" style="margin-left:50px;">Connect</button>
+			<form>
+				<div align="center">
+					<div class="input-prepend" style="margin-top:20px;">
+						<span class="add-on">@</span>
+						<input class="span2" id="usrName" type="text" placeholder="Username">
+					</div>
+					<div>
+						<input class="input-medium" id="usrLoc" style="width:178px" type="text" placeholder="Location">
+					</div>
+					<div>
+						<button class="btn" type="submit" style="margin-left:50px;" onClick="btnConnectClick()">Connect & Search</button>
+					</div>
+				</div>
+			</form>
+			<hr id="divider1">
+			<div id="divMap">
 			</div>
-			
+			<hr id="divider2">
+			<div id="divSummary">
+			</div>
         </div>
     </body>
 </html>
