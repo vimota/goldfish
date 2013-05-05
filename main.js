@@ -12,7 +12,6 @@ $(document).ready(function() {
   cb.setConsumerKey(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
   cb.setToken('14197193-vx7NLH8zJRSksrotn3k2ZnOYkDUEeplMxH14pz9rE', 'FhRv0OwSCWotHg4HW50FPPJGU5o3Yhn6WWjbT15HXOw');
   getRelatedTweets(TWITTER_USERID, CITY);
-  console.log(cb);
 
   function btnConnectClick(){
   	VENUES = getVenueNames(CITY);
@@ -24,7 +23,7 @@ $(document).ready(function() {
         $.each(userIds, function(index, userId) {
           cb.__call(
           'statuses_userTimeline',
-          {user_id:userId},
+          {user_id:userId, count: 20},
           function (tweets) {
             $.each(tweets, function(tweetIndex, tweet) {
               $.each(venues, function(venueIndex, venue) {
@@ -66,7 +65,8 @@ $(document).ready(function() {
 				var places = [];
 				$.each(data.response.venues, function(i, venue){
 					places.push({name: venue.name, lat: venue.location.lat, lng:venue.location.lng, hereNow: venue.hereNow.count, male:0, female:0, tweets:[]});
-          if (i === venue.length - 1) {
+          if (i === data.response.venues.length - 1) {
+            console.log("DONE VENUES");
             callback(places);
           }
 				});
